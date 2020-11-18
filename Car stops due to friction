@@ -1,0 +1,75 @@
+#include <graphics.h> 
+#include <stdio.h> 
+
+void draw_moving_car(int speed, double friction) { 
+
+	int i, j = 0, gd = DETECT, gm; 
+	if(friction > 1){
+		friction = friction/100;
+	}
+	initgraph(&gd, &gm, ""); 
+	int counter = 0;
+
+	for (i = 0; i <= 1400; i = i + speed) {
+
+		setcolor(BLUE); 
+
+
+		//  car 
+		line(0 + i, 300, 210 + i, 300); 
+		line(50 + i, 300, 75 + i, 270); 
+		line(75 + i, 270, 150 + i, 270); 
+		line(150 + i, 270, 165 + i, 300); 
+		line(0 + i, 300, 0 + i, 330); 
+		line(210 + i, 300, 210 + i, 330); 
+		circle(65 + i, 330, 15); 
+		circle(65 + i, 330, 2); 
+		circle(145 + i, 330, 15); 
+		circle(145 + i, 330, 2); 
+		line(0 + i, 330, 50 + i, 330); 
+		line(80 + i, 330, 130 + i, 330); 
+		line(210 + i, 330, 160 + i, 330); 
+
+		delay(100); 
+// speed update
+			counter += 1;
+		if(counter%speed == 0)
+		speed = speed - speed*friction;
+		if(speed == 0)
+			break;
+// erase 
+		setcolor(BLACK); 
+		
+		line(0 + i, 300, 210 + i, 300); 
+		line(50 + i, 300, 75 + i, 270); 
+		line(75 + i, 270, 150 + i, 270); 
+		line(150 + i, 270, 165 + i, 300); 
+		line(0 + i, 300, 0 + i, 330); 
+		line(210 + i, 300, 210 + i, 330); 
+
+		circle(65 + i, 330, 15); 
+		circle(65 + i, 330, 2); 
+
+		circle(145 + i, 330, 15); 
+		circle(145 + i, 330, 2); 
+
+		line(0 + i, 330, 50 + i, 330); 
+
+		line(80 + i, 330, 130 + i, 330); 
+
+		line(210 + i, 330, 160 + i, 330); 
+	} 
+	printf("CAR STOPPED \n");
+
+	getch(); 
+    cleardevice(); 
+	getch();
+	closegraph(); 
+} 
+
+int main() 
+{ 
+	draw_moving_car(20,0.25); 
+
+	return 0; 
+} 
