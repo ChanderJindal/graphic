@@ -1,14 +1,16 @@
 #include <graphics.h> 
 #include <stdio.h> 
+#include <iostream>
+
+using namespace std;
 
 void draw_moving_car(int speed, double friction) { 
 
 	int i, j = 0, gd = DETECT, gm; 
-	if(friction > 1){
+	while(friction > 1){
 		friction = friction/100;
 	}
 	initgraph(&gd, &gm, ""); 
-	int counter = 0;
 
 	for (i = 0; i <= 1400; i = i + speed) {
 
@@ -32,8 +34,6 @@ void draw_moving_car(int speed, double friction) {
 
 		delay(100); 
 // speed update
-			counter += 1;
-		if(counter%speed == 0)
 		speed = speed - speed*friction;
 		if(speed == 0)
 			break;
@@ -69,7 +69,13 @@ void draw_moving_car(int speed, double friction) {
 
 int main() 
 { 
-	draw_moving_car(20,0.25); 
+double speed,friction;
+cout<<"Enter the Speed of thee Car : ";
+cin>>speed;
+cout<<endl<<"Enter the Co-efficient of Friction : ";
+cin>>friction;
+cout<<endl;
+	draw_moving_car(speed,friction); 
 
 	return 0; 
 } 
