@@ -1,0 +1,114 @@
+#include <graphics.h>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void o2_bubbles(int x , int y){
+	if(y<100){
+		y += 200;
+	circle(100,y+110-x,10);
+	circle(100,y+130-x,5);
+	circle(100,y+90-x,15);
+}
+}
+
+void fish1_maker_right(int x){ // right
+    o2_bubbles(140+x,250);
+	line(150+x,250,190+x,290);
+	line(150+x,250,90+x,310);
+	line(90+x,270,150+x,330);
+	line(190+x,290,150+x,330);
+	line(90+x,310,90+x,270);
+	circle(170+x,290,3);
+}
+void fish1_maker_left(int x){ // left
+    o2_bubbles(140+x,250);
+
+//	line(150+x,250,90+x,310); // top left
+// right-back
+	line(150+x,250,190+x,290); // top right
+	line(150+x,330,190+x,290); // bottom right
+//	line(150+x,330,90+x,270); // bottom left
+//	circle(190+x,290,10); // marker
+	// tail
+	line(190+x,290,210+x,310);
+	line(190+x,290,210+x,270);
+	line(210+x,310,210+x,270);
+	// left- front
+	line(150+x,330,90+x,290);
+	line(150+x,250,90+x,290);
+	
+//	line(90+x,270,150+x,330);
+//	line(190+x,290,150+x,330);
+//	line(90+x,310,90+x,270);
+	circle(110+x,290,3);
+}
+/*
+void fish2_maker(int x){
+	arc(400-x,150,50,320,30);
+	line(420-x,128,450-x,160);
+	line(420-x,173,450-x,130);
+	line(450-x,160,450-x,130);
+	arc(380-x,150,270,90,20);
+	circle(380-x,150,3);
+}
+*/
+void tank(){ // O2
+	line(50,300,80,300);
+	line(80,300,80,370);
+	line(50,370,80,370);
+	line(80,305,90,305);
+	line(80,310,90,310);
+	line(90,305,90,310);
+}
+
+void fish_tank(){
+	// top
+	line(50,10,550,10);
+	line(50,10,10,100);
+	line(550,10,590,100);
+	line(10,100,590,100);
+	// edges 
+	line(50,100,50,400);
+	line(550,100,550,400);
+	line(50,400,550,400);
+}
+
+void fish_toward_right(){
+		int i,y=200;
+	for( i = 0 ; i < 300;i++){
+		fish1_maker_right(i);
+		tank();
+		o2_bubbles(i,y);
+		y--;
+		fish_tank();
+		delay(10);
+		cleardevice();
+	}
+}
+void fish_towards_left(){
+		int i,y=200;
+	for( i = 300 ; i >= 0;i--){
+		fish1_maker_left(i);
+		tank();
+		o2_bubbles(300-i,y);
+		y--;
+		fish_tank();
+		delay(10);
+		cleardevice();
+	}
+}
+
+
+int main(){
+	int gd = DETECT,gm;
+	initgraph(&gd,&gm,"");
+	while(true){
+		fish_toward_right();
+		fish_towards_left();
+	}
+	
+	getch();
+	closegraph();
+return 0;
+}
