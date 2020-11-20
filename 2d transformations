@@ -1,0 +1,111 @@
+#include<iostream>  
+#include<graphics.h>  
+#include<math.h>  
+#include<conio.h>
+#define pi 3.1415926
+
+using namespace std;
+
+void translation(int x1,int y1,int x2,int y2,int x3,int y3){
+	int gd=DETECT,gm ;
+initgraph(&gd,&gm,"c:\\turboc3\\bgi");
+setcolor(WHITE);
+line(x1,y1,x2,y2);
+line(x2,y2,x3,y3);
+line(x3,y3,x1,y1);
+int x,y;
+cout << "Enter translation co-ordinates " << endl ;
+cout << "x,y" << endl  ;
+cin >> x >> y ;
+x1=x1+x;
+y1=y1+y;
+x2=x2+x;
+y2=y2+y;
+x3=x3+x ;
+y3=y3+y ;
+cout << "Line after translation" << endl ;
+setcolor(BLUE);
+line(x1,y1,x2,y2);
+line(x2,y2,x3,y3);
+line(x3,y3,x1,y1);
+getch();
+closegraph();  
+return;
+}
+
+void scaling(int x1,int y1,int x2,int y2,int x3,int y3){
+	int gd=DETECT,gm ;
+initgraph(&gd,&gm,"c:\\turboc3\\bgi");
+setcolor(WHITE);
+line(x1,y1,x2,y2);
+line(x2,y2,x3,y3);
+line(x3,y3,x1,y1);
+int x,y;
+cout << "Enter Scaling co-ordinates " << endl ;
+cout << "x,y" << endl  ;
+cin >> x >> y ;
+x1=x1*x;
+y1=y1*y;
+x2=x2*x;
+y2=y2*y;
+x3=x3*x ;
+y3=y3*y ;
+cout << "Line after Scaling" << endl ;
+setcolor(BLUE);
+line(x1,y1,x2,y2);
+line(x2,y2,x3,y3);
+line(x3,y3,x1,y1);
+getch();
+closegraph();  
+return;
+}
+void rotation(int x1,int y1,int x2,int y2,int x3,int y3){
+    int gd=DETECT,gm ;
+    initgraph(&gd,&gm,"c:\\turboc3\\bgi");
+    setcolor(WHITE);
+    line(x1,y1,x2,y2);
+    line(x2,y2,x3,y3);
+    line(x3,y3,x1,y1);
+	double s,c, angle;  
+    cout << "Enter rotation angle: " << "\n";  
+    cin >> angle ;
+    setbkcolor(WHITE);  
+    c = cos(angle *(pi/180));  
+    s = sin(angle *(pi/180));  
+    x1 = floor(x1 * c + y1 * s);  
+    y1 = floor(-x1 * s + y1 * c);  
+    x2 = floor(x2 * c + y2 * s);  
+    y2 = floor(-x2 * s + y2 * c);  
+    x3 = floor(x3 * c + y3 * s);  
+    y3 = floor(-x3 * s + y3 * c);  
+   // cleardevice();  
+    setcolor(BLUE);
+    line(x1, y1 ,x2, y2);  
+    line(x2,y2, x3,y3);  
+    line(x3, y3, x1, y1);
+    getch();
+    closegraph();
+}
+
+int main() {
+	int x1,y1,x2,y2,x3,y3;    
+    cout << "Enter coordinates of triangle: "  << "\n" ;
+    cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 ;
+    int n{0};
+    cout<<"Enter [1] for Translation"<<endl;
+    cout<<"Enter [2] for Scaling"<<endl;
+    cout<<"Enter [3] for rotation"<<endl;
+    cout<<"Enter [-1] to terminate the program"<<endl;
+    while(n!=-1){
+    	cout<<"Enter your choice"<<endl;
+    	cin>>n;
+    	switch(n){
+    		case(1):translation(x1,y1,x2,y2,x3,y3); break;
+    		case(2):scaling(x1,y1,x2,y2,x3,y3); break;
+    		case(3):rotation(x1,y1,x2,y2,x3,y3); break;
+    		default: cout<<"Invalid Input Try again"<<endl;
+		}
+	}
+	cout<<"Program Terminated"<<endl;
+    return 0;
+}
