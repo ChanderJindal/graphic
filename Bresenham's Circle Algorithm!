@@ -1,0 +1,140 @@
+#include<iostream>
+#include<graphics.h>
+#include<bits/stdc++.h>
+
+using namespace std;
+
+void pixel_placer(int x, int y ,int x1 , int y1){
+	putpixel(x+x1,y+y1,MAGENTA);
+	putpixel(x+x1,y-y1,BLUE);
+	putpixel(x-x1,y+y1,CYAN);
+	putpixel(x-x1,y-y1,GREEN);
+	swap(x1,y1);
+	putpixel(x+x1,y+y1,MAGENTA);
+	putpixel(x+x1,y-y1,BLUE);
+	putpixel(x-x1,y+y1,CYAN);
+	putpixel(x-x1,y-y1,GREEN);
+	return;
+}
+
+void mid_point(){
+	cout<<"Welcome to Mid Point Algorithm!"<<endl;
+	cout<<"Enter the Co-ordinates of Center of Circle followed by Radius of Circle"<<endl;
+	int x,y,r;
+	cin>>x>>y>>r;
+int gm = DETECT, gd;
+initgraph(&gm,&gd, "");
+	int x1 = 0 , y1 = r, p = 1-r;
+	while(y1>= x1){
+		//putpixel(x1,y1,BLUE);
+					pixel_placer(x,y,x1,y1);
+	if(p<0)
+	p = p + 2*x1 + 3;
+	else{
+	p = p + 2*(x1-y1) + 5;
+	 y1--;
+	}
+	x1++;
+}
+getch();
+cleardevice();
+closegraph();
+return;
+}
+void bre_circle(){
+	
+	cout<<"Welcome to Bresenham's Circle Algorithm!"<<endl;
+	cout<<"Enter the Co-ordinates of Center of Circle followed by Radius of Circle"<<endl;
+	int x,y,r;
+	cin>>x>>y>>r;
+int gm = DETECT, gd;
+initgraph(&gm,&gd, "");
+	int x1 = 0 , y1 = r,d = 3 - 2 *r;
+	pixel_placer(x,y,x1,y1);
+	while(y1 >= x1){
+		x1++;
+		if(d>0){
+			y1--; d = d + 4*(x1-y1) + 10;
+		}else
+		d = d+ 4*x1 + 6;
+			pixel_placer(x,y,x1,y1);
+	}
+	getch();
+	cleardevice();
+	closegraph();
+return;
+}
+
+void bre_line(){
+		cout<<"Welcome to Bresenham's Line Algorithm!"<<endl;
+		cout<<"Enter the starting and ending Co-ordinates of the line"<<endl;
+		int x1,y1,x2,y2;
+		cin>>x1>>y1>>x2>>y2;
+
+int gm = DETECT, gd;
+initgraph(&gm,&gd, "");
+   int slope = 2 * (y2 - y1); 
+   int d = slope - (x2 - x1); 
+   for (int x = x1, y = y1; x <= x2; x++){
+      putpixel(x,y,BLUE);
+      d += slope;  
+      if (d >= 0){
+         y++; 
+         d  -= 2 * (x2 - x1); 
+      } 
+   }
+   getch();
+   cleardevice();
+   closegraph();
+return;
+}
+void dda_line(){
+	cout<<"Welcome to DDA Line Algorithm!"<<endl;
+	cout<<"Enter the starting and ending Co-ordinates of the line"<<endl;
+		int x1,y1,x2,y2;
+		cin>>x1>>y1>>x2>>y2;
+
+int gm = DETECT, gd;
+initgraph(&gm,&gd, "");
+		 int dx = x2 - x1 , dy = y2-y1;
+	int step = max(abs(dx),abs(dy));
+	float x_inc = dx / (float) step, y_inc = dy / (float) step;
+	float x =0, y=0;
+	for(int i = 0;i<step;i++){
+		putpixel(x,y,BLUE);
+		x += x_inc;
+		y += y_inc;
+	}
+	getch();
+	cleardevice();
+closegraph();
+return;
+}
+
+int main(){
+cout<<"So, What do you wanna do Today ?"<<endl;
+cout<<"Press 1 for DDA Line Algorithm "<<endl;
+cout<<"Press 2 for Bresenham's Line Algorithm"<<endl;
+cout<<"Press 3 for Bresenham's Circle Algorithm"<<endl;
+cout<<"Press 4 for mid point Circle Algorithm "<<endl;
+cout<<"Press 0 to Exit"<<endl;
+int command;
+cin>>command;
+while(command != 0){
+	if(command == 1 )
+	dda_line();
+	else if(command == 2 )
+	bre_line();
+	else if(command == 3 )
+	bre_circle();
+	else if(command == 4 )
+	mid_point();
+	else if(command == 0 ){
+		break;
+	}else{
+		cout<<"Invalid Input"<<endl;
+	}
+	cin>>command;
+}
+return 0;
+}
