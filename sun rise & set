@@ -1,0 +1,168 @@
+#include<graphics.h>
+#include<bits/stdc++.h>
+using namespace std;
+
+void mount(){
+
+setfillstyle(1,GREEN);
+//mountain
+line(0,480,200,300);
+line(200,300,400,480);
+line(400,480,600,300);
+line(600,300,800,480);
+floodfill(150,350,WHITE);
+floodfill(550,350,WHITE);
+
+}
+void sun_set(){
+	int c=0;
+for(int a=0;a<150;a++){
+setfillstyle(1,WHITE);
+circle(400,150+c,40);
+floodfill(400,113+c,WHITE);
+c=c+3;
+delay(10);
+
+setfillstyle(1,BLACK);
+circle(400,150+c,40);
+floodfill(400,113+c,BLACK);
+mount();
+}
+
+}
+void sun_set_rise(){
+	int c=450;
+for(int a=0;a<150;a++){
+setfillstyle(1,WHITE);
+circle(400,150+c,40);
+floodfill(400,113+c,WHITE);
+c=c-3;
+delay(10);
+
+setfillstyle(1,BLACK);
+circle(400,150+c,40);
+floodfill(400,113+c,BLACK);
+mount();
+}
+setfillstyle(1,WHITE);
+circle(400,150+c,40);
+floodfill(400,113+c,WHITE);
+}
+
+int sun_rise(){
+	mount();
+	int b=0;
+for(int a=0;a<150;a++){
+setfillstyle(1,WHITE);
+circle(400,600-b,40);
+floodfill(400,600-b,WHITE);
+delay(10);
+
+cleardevice();
+
+b=b+3;
+
+mount();
+
+}
+setfillstyle(1,WHITE);
+circle(400,600-b,40);
+floodfill(400,600-b,WHITE);
+
+}
+
+
+
+/*
+	int b=0;
+for(int a=0;a<150;a++){
+setfillstyle(1,WHITE);
+circle(400,600-b,40);
+floodfill(400,600-b,WHITE);
+
+setfillstyle(1,BLACK);
+circle(400,600-b,40);
+floodfill(400,600-b,BLACK);
+
+b=b+3;
+delay(10);
+
+}
+*/
+int sun_rise2(){
+	mount();
+	int b=0;
+for(int a=0;a<150;a++){
+setfillstyle(1,WHITE);
+circle(400,600-b,40);
+floodfill(400,600-b,WHITE);
+delay(10);
+
+setfillstyle(1,BLACK);
+circle(400,600-b,40);
+floodfill(400,600-b,BLACK);
+
+b=b+3;
+
+mount();
+
+}
+setfillstyle(1,WHITE);
+circle(400,600-b,40);
+floodfill(400,600-b,WHITE);
+
+}
+
+int main()
+{
+
+int gdriver = DETECT,gmode;
+initgraph(&gdriver,&gmode," ");
+cleardevice();
+mount();
+/*
+//sun rise
+sun_rise();
+//circle(400,150,50);
+delay(1000);
+cleardevice();
+delay(1000);
+sun_rise2();
+cleardevice();
+//delay(1000);*/
+sun_set_rise();
+line(350,130,330,120);
+line(360,115,340,100);
+line(378,105,360,85);
+
+line(450,130,470,120);
+line(440,115,460,100);
+line(420,105,435,85);
+
+line(445,170,470,185);
+line(435,185,455,205);
+line(420,200,430,222);
+
+line(352,170,325,175);
+line(360,185,340,200);
+line(380,195,365,215);
+
+
+line(350,150,325,150);
+line(400,100,400,75);
+line(450,150,475,150);
+line(400,200,400,225);
+
+ delay(1500);
+//sun set
+cleardevice();
+mount();
+sun_set();
+
+getch();
+closegraph();
+return 0;
+}
+
+
+
