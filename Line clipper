@@ -1,0 +1,77 @@
+#include <iostream> 
+#include <graphics.h> 
+using namespace std; 
+
+int x1,y1,x2,y2;
+
+void rect(){
+	cin>>x1>>y1>>x2>>y2;
+	line(x1,y1,x2,y1);
+	line(x1,y1,x1,y2);
+	line(x2,y2,x2,y1);
+	line(x2,y2,x1,y2);
+return;
+}
+int eq_y(int x){
+	return (x - x1)*((y2-y1)/(x2-x1)) + y1 ; 
+}
+int eq_x(int y){
+	return (y - y1)*((x2-x1)/(y2-y1)) + x1;
+}
+void line_print(){
+	int a,b,c,d;
+	cin>>a>>b>>c>>d;
+	float m = (d-b)/(c-a),t = (c-a)/(d-b);
+	setcolor(BLUE);
+//	line(a,b,c,d);
+//	setcolor(BLACK);
+	line(a,b,c,d);
+	if(a < x1){
+		a = x1;
+		b =  d + m*(a - c);
+	}
+	 if(a > x2){
+		 a = x2;
+	b =  d + m*(a-c);
+	}
+	 if(b > y1){
+				b = y1;
+		a = c + t*(b-d);
+	}
+	 if( b < y2){
+				b = y2;
+	a = c + t*(b-d);
+	}
+		if(c < x1){
+					a = x1;
+		d =  b + m*(c-a);
+	}
+	 if(c > x2){
+	 	c = x2;
+	d =  b + t*(c-a);
+	}else if(d > y1){
+		d =y1;
+		c = a + t*(d-b);
+	}else if( d < y2){
+		d = y2;
+	c = a + t*(d-b);
+	}
+	delay(200);
+	setcolor(WHITE);
+line(a,b,c,d);
+return;
+}
+
+int main() {
+	int gd = DETECT, gm,n;
+	initgraph(&gd, &gm, ""); 
+	cout<<"Enter the Co-ordinates of the Rectanglar screen required (diagonal vertices) :"<<endl;
+	rect();
+
+		cout<<"Enter the co-ordinated of line"<<endl;
+		line_print();
+	getch(); 
+	closegraph(); 
+	return 0; 
+} 
+
