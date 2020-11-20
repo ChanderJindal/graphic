@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+#include<graphics.h>
+using namespace std;
+void beizer(int x[],int y[]){
+double u,px,py;
+for(u=0.0;u<1.0;u+=0.0005){
+px=pow(1-u,3)*x[0]+3*u*pow(1-u,2)*x[1]+3*pow(u,2)*(1-u)*x[2]+pow(u,3)*x[3];
+py=pow(1-u,3)*y[0]+3*u*pow(1-u,2)*y[1]+3*pow(u,2)*(1-u)*y[2]+pow(u,3)*y[3];
+putpixel(px,py,RED);
+}
+}
+int main(){
+int xc[4], yc[4];
+cout<<"Enter Points (4), control Points (x,y)"<<endl;
+for(int i = 0; i< 4 ; i++){
+	cin>>xc[i]>>yc[i];
+}
+int gd=DETECT,gm;initgraph(&gd,&gm,"");
+beizer(xc,yc);
+getch();
+closegraph();
+return 0;
+}
